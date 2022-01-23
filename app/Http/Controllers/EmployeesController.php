@@ -88,14 +88,9 @@ class EmployeesController extends Controller
     public function update(EmployeeRequest $request, $id)
     {
         $data = $request->all();
-        //check data
+        //find data
         $employee = Employee::find($id);
 
-        //validation data from input
-        Validator::make($data , [
-            'name' => ['required','max:255'],
-        ])->validate();
-        
         //update data
         $employee->update($data);
 
@@ -119,7 +114,7 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        //check data
+        //find data
         $employee = Employee::find($id);
 
         //delete data

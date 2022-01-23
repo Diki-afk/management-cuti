@@ -117,7 +117,7 @@ class LeavesController extends Controller
      */
     public function destroy($id)
     {
-        //check data leave
+        //find data
         $leave = Leave::find($id);
 
         //delete data
