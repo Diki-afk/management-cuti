@@ -30,13 +30,8 @@ class EmployeeDataTable extends DataTable
                 return $employee->leaves->sum('long_leave') . ' hari';
             })
             ->addColumn('remaining_leave', function(Employee $employee){
-                //count remaining cuti based on join_date
-                $now = date_create(date('Y-m-d'));
-                $joinDate = date_create($employee->join_date);
-                $diff = (array)date_diff($now , $joinDate);
-                $total = ($diff['y']*12) + $diff['m'];
                 //calculate remaining
-                return $total - $employee->leaves->sum('long_leave') . ' hari';
+                return $employee->totalLeave - $employee->leaves->sum('long_leave') . ' hari';
             })
             ->addColumn('action', function(Employee $employee){
                 return view('pages.employee.component.action', compact('employee'));
