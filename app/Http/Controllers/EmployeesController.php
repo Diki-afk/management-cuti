@@ -39,6 +39,10 @@ class EmployeesController extends Controller
     public function store(EmployeeRequest $request)
     {
         $data = $request->all();
+        //validation data identification number unique
+        Validator::make($data , [
+            'identification_number' => ['unique:tb_employees,identification_number'],
+        ])->validate();
 
         //create data
         Employee::create($data);
@@ -90,11 +94,13 @@ class EmployeesController extends Controller
         $data = $request->all();
         //find data
         $employee = Employee::find($id);
-
+        Validator::make($data , [
+            'identification_number' => ['unique:tb_employees,identification_number,'.$id],
+        ])->validate();
         //update data
         $employee->update($data);
 
-        return redirect()->back()->with('status', "
+        return redirect()->route('employees.index')->with('status', "
             <script>
                 swal({
                 text: 'Data Karyawan Berhasil Disimpan',

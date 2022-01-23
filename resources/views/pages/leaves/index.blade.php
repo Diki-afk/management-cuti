@@ -3,6 +3,21 @@
 @section('content')
 <div class="content-wrapper">
     <div class="row">
+      @if ($errors->any())
+        @foreach ($errors->all() as $error)
+          <div role="alert" class="alert border-0 border-start border-5 border-danger alert-dismissible fade show py-2">
+             <div class="d-flex align-items-center">
+                <div class="font-35 text-danger"><i class='bx bxs-message-square-x'></i>
+                </div>
+                <div class="ms-3">
+                <h6 class="mb-0 text-danger">INVALID !!!</h6>
+                <li>{{ $error }}</li>
+               </div>
+             </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endforeach
+      @endif
       <div class="col-sm-12">
         <div class="home-tab">
           <div class="tab-content tab-content-basic">
@@ -42,6 +57,7 @@
                     </div>
                     <form action="{{ route('leaves.store') }}" method="POST">
                             @csrf
+                        <div class="modal-body">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -73,8 +89,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary text-white">Save</button>
+                        </div>
                     </form>
                 </div>
             </div>
